@@ -6,7 +6,6 @@ import os
 import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
-global book_ids
 book_ids = []
 
 @app.route("/sms", methods=['GET', 'POST'])
@@ -47,8 +46,7 @@ def handle_book_to_add(msg, session):
     if add_response.status_code != 201:
         return 'Your book could not be added.'
     else:
-        global book_ids
-        book_ids = []
+        book_ids.clear()
         return 'Book added!'
 
 # Set up Goodreads session to make calls to their api
@@ -78,8 +76,7 @@ def get_search_results(session, key, title):
 # Parse search results and format response message for user
 def parse_search_results(root):
     counter = 1
-    global book_ids
-    book_ids = []
+    book_ids.clear()
     resp_msg = 'Your search results: '
     for result in root.iter('work'):
         book = result.find('best_book')
