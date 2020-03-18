@@ -1,4 +1,4 @@
-Flask==0.12
+Flask==1.1.1
 gunicorn==19.10.0
 rauth==0.7.3
 twilio==6.29.2
